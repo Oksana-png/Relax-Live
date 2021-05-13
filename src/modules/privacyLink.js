@@ -10,7 +10,7 @@ const privacyLink = () => {
   };
 
   links.forEach((link) => {
-    if (link.textContent === "") link.addEventListener("click", openPrivacy);
+    link.addEventListener("click", openPrivacy);
   });
   document.addEventListener("click", (e) => {
     const target = e.target;
