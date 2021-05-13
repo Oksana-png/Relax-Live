@@ -1,5 +1,4 @@
 const tel = () => {
-  console.log("РАБОТАЕТ???");
   const wrapBlock = document.querySelector(
     ".header-contacts__phone-number-accord"
   );
