@@ -10,8 +10,6 @@ const tel = () => {
 
   arrow.addEventListener("click", () => {
     if (arrImg.style.transform === "rotate(180deg)") {
-      console.log("попало");
-
       let count = 25;
       telLink.style.opacity = 0;
       const anim = setInterval(() => {
@@ -26,7 +24,6 @@ const tel = () => {
       }, 10);
       return;
     }
-    console.log("прошло");
     let i = 0;
     const anim = setInterval(() => {
       i++;
@@ -89,3 +86,19 @@ const toggleMenu = () => {
 };
 
 toggleMenu();
+
+const scrollLigth = () => {
+  const blockLinks = document.querySelectorAll("a.scroll");
+
+  blockLinks.forEach((elem) => {
+    elem.addEventListener("click", (event) => {
+      event.preventDefault();
+      const id = elem.getAttribute("href");
+      document.querySelector(id).scrollIntoView({
+        behavior: "smooth",
+        blocks: "start",
+      });
+    });
+  });
+};
+scrollLigth();
