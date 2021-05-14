@@ -2,7 +2,22 @@ const hint = () => {
   const formulaItemCurcule = document.querySelectorAll(".formula-item__icon");
   const textHint = document.querySelectorAll(".formula-item-popup");
 
-  const mobileHint = () => {};
+  const mobileHint = () => {
+    const arrowPrev = document.querySelector(".slider-arrow_left-formula"),
+      arrowNext = document.querySelector(".slider-arrow_right-formula");
+
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (
+        !target.matches(
+          ".slider-arrow_left-formula, .slider-arrow_right-formula"
+        )
+      ) {
+        console.log(target);
+      }
+    });
+  };
+
   const desctorHint = (e) => {
     const target = e.target;
 
@@ -19,7 +34,6 @@ const hint = () => {
   };
   const closeHint = (e) => {
     const target = e.target;
-
     formulaItemCurcule.forEach((item, i) => {
       if (target === item) {
         textHint[i].style.visibility = "hidden";
