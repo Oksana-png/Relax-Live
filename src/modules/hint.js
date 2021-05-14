@@ -10,6 +10,7 @@ const hint = () => {
       if (target === item) {
         textHint[i].style.visibility = "visible";
         textHint[i].style.opacity = 1;
+        textHint.querySelector("[:before]");
       }
     });
   };
