@@ -6,9 +6,7 @@ import scrollLigth from "./modules/scrollLigth";
 import toggleRepairTypes from "./modules/toggleRepairTypes";
 import privacyLink from "./modules/privacyLink";
 import reviewsSlider from "./modules/reviewsSlider";
-
-// ????????? DELETE
-import renderData from "./modules/renderData";
+import accordeon from "./modules/accordeon";
 
 tel();
 toggleMenu();
@@ -17,4 +15,4 @@ toggleMenu();
 toggleRepairTypes();
 privacyLink();
 reviewsSlider();
-renderData();
+accordeon();
