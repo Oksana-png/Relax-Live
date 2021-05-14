@@ -7,6 +7,7 @@ import toggleRepairTypes from "./modules/toggleRepairTypes";
 import privacyLink from "./modules/privacyLink";
 import reviewsSlider from "./modules/reviewsSlider";
 import accordeon from "./modules/accordeon";
+import modalConsult from "./modules/modalConsult";
 import hint from "./modules/hint";
 
 tel();
@@ -17,4 +18,5 @@ toggleRepairTypes();
 privacyLink();
 reviewsSlider();
 accordeon();
+modalConsult();
 hint();

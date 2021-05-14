@@ -1,21 +1,64 @@
+import SliderCarousel from "./sliderCarousel";
 const hint = () => {
   const formulaItemCurcule = document.querySelectorAll(".formula-item__icon");
   const textHint = document.querySelectorAll(".formula-item-popup");
 
   const mobileHint = () => {
     const arrowPrev = document.querySelector(".slider-arrow_left-formula"),
-      arrowNext = document.querySelector(".slider-arrow_right-formula");
+      arrowNext = document.querySelector(".slider-arrow_right-formula"),
+      wrapperSliders = document.querySelector(".formula-slider"),
+      sliders = document.querySelectorAll(".formula-slider__slide"),
+      wrap = document.querySelector(".formula-slider-wrap");
+    let currentSlide = 0;
 
+    const nextSlideAdd = (elem, index, strClass) => {
+      elem[index].classList.add(strClass);
+    };
+    const prevSlideAdd = (elem, index, strClass) => {
+      elem[index].classList.remove(strClass);
+    };
+    nextSlideAdd(sliders, currentSlide, "active-item");
     document.addEventListener("click", (e) => {
       const target = e.target;
-      if (
-        !target.matches(
-          ".slider-arrow_left-formula, .slider-arrow_right-formula"
-        )
-      ) {
-        console.log(target);
+      prevSlideAdd(sliders, currentSlide, "active-item"); // сами слайды
+
+      if (target.matches("#formula-arrow_left")) {
+        currentSlide--;
+      } else if (target.matches("#formula-arrow_right")) {
+        currentSlide++;
       }
+
+      if (currentSlide > sliders.length) {
+        arrowNext.style.display = "none";
+        currentSlide = sliders.length;
+      } else if (currentSlide < 0) {
+        arrowPrev.style.display = "none";
+        currentSlide = 0;
+      }
+      arrowPrev.style.display = "flex";
+      arrowNext.style.display = "flex";
+      nextSlideAdd(sliders, currentSlide, "active-item");
     });
+
+    const slider = new SliderCarousel({
+      main: ".formula-slider-wrap",
+      wrap: ".formula-slider",
+      slides: ".formula-slider__slide",
+      next: ".slider-arrow_right-formula",
+      prev: ".slider-arrow_left-formula",
+      slidesToShow: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          slideToShow: 3,
+        },
+        {
+          breakpoint: 567,
+          slideToShow: 2,
+        },
+      ],
+    });
+    slider.init();
   };
 
   const desctorHint = (e) => {
