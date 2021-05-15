@@ -10,6 +10,7 @@ import accordeon from "./modules/accordeon";
 import modalConsult from "./modules/modalConsult";
 import hint from "./modules/hint";
 import transparency from "./modules/transparency";
+import repairSlider from "./modules/repairSlider";
 
 tel();
 toggleMenu();
@@ -22,3 +23,4 @@ accordeon();
 modalConsult();
 hint();
 transparency();
+repairSlider();
