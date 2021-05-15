@@ -6,6 +6,7 @@ const repairSlider = () => {
   const numderSlide = wrapRepair.querySelector(
     ".slider-counter-content__current"
   );
+  const tab = wrapRepair.querySelectorAll(".repair-types-nav__item");
   let activeSlider;
   const updateCounter = (slider) => {
     totalSlide.textContent = slider.children.length;
@@ -41,10 +42,10 @@ const repairSlider = () => {
   // активация первого слайдера по умолчанию
   renderSlider(0);
   nextSlide(activeSlider, currentSlide);
+  tab[0].classList.add("active");
   //
 
   const tabs = (target) => {
-    const tab = wrapRepair.querySelectorAll(".repair-types-nav__item");
     tab.forEach((item, i) => {
       if (target === item) {
         item.classList.add("active");
@@ -77,7 +78,68 @@ const repairSlider = () => {
       tabs(target);
     }
   });
+  const tabsSliderMobile = () => {
+    const wrapOverfHid = wrapRepair.querySelector(".repair-types-nav__item");
+    const nextArrow = document.querySelector("#nav-arrow-repair-right_base");
+    const prevArrow = document.querySelector("#nav-arrow-repair-left_base");
+    const list = document.querySelector(".nav-list-repair");
+    list.style.minWidth = "inherit";
+    let currentTab = 1;
+    tab.forEach((item) => (item.style.display = "none"));
+
+    const nextSlide = (elem, index) => {
+      elem[index + 1].style.display = "block";
+      elem[index].style.display = "block";
+      elem[index - 1].style.display = "block";
+    };
+    const prevSlide = (elem, index) => {
+      tab.forEach((item) => {
+        item.style.display = "none";
+      });
+    };
+    const runSliderTab = () => {
+      prevSlide(tab, currentTab);
+      if (currentTab > tab.length - 2) {
+        nextArrow.style.display = "none";
+        currentTab = tab.length - 2;
+        return;
+      } else if (currentTab < 1) {
+        prevArrow.style.display = "none";
+        currentTab = 1;
+        return;
+      }
+      prevArrow.style.display = "block";
+      nextArrow.style.display = "block";
+      if (currentTab === 1) {
+        prevArrow.style.display = "none";
+      }
+      nextSlide(tab, currentTab);
+    };
+
+    nextSlide(tab, currentTab);
+    runSliderTab();
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target.closest("#nav-arrow-repair-left_base")) {
+        prevSlide(tab, currentTab);
+        currentTab--;
+        runSliderTab();
+
+        console.log(currentTab);
+      } else if (target.closest("#nav-arrow-repair-right_base")) {
+        prevSlide(tab, currentTab);
+        currentTab++;
+        runSliderTab();
+        if (currentTab === 3) {
+          nextArrow.style.display = "none";
+        }
+        console.log(currentTab);
+      }
+    });
+  };
+  if (window.innerWidth <= 1024) {
+    tabsSliderMobile();
+  }
 };
 
-// repairSlider();
 export default repairSlider;
