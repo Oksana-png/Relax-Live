@@ -69,6 +69,45 @@ const transparency = () => {
     });
   };
   sliderModal();
-};
 
+  const wrappBlock = document.querySelector(".transparency");
+  const itemsTranscpar = document.querySelectorAll(".transparency-item");
+  const maxItem = itemsTranscpar.length;
+  const mobileSlider = () => {
+    let currentSlide = 0;
+    const nextSlide = (elem, index) => {
+      elem[index].style.display = "flex";
+    };
+    const prevSlide = (elem, index) => {
+      elem[index].style.display = "none";
+    };
+    const runSlide = () => {
+      if (currentSlide > maxItem - 1) {
+        currentSlide = 0;
+      } else if (currentSlide < 0) {
+        currentSlide = maxItem - 1;
+      }
+      nextSlide(itemsTranscpar, currentSlide);
+    };
+    itemsTranscpar.forEach((item) => {
+      item.style.display = "none";
+    });
+    nextSlide(itemsTranscpar, currentSlide);
+    wrappBlock.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target.closest("#transparency-arrow_left")) {
+        prevSlide(itemsTranscpar, currentSlide);
+        currentSlide--;
+        runSlide();
+      } else if (target.closest("#transparency-arrow_right")) {
+        prevSlide(itemsTranscpar, currentSlide);
+        currentSlide++;
+        runSlide();
+      }
+    });
+  };
+  if (window.innerWidth <= 1091) {
+    mobileSlider();
+  }
+};
 export default transparency;
