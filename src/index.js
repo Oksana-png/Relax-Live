@@ -9,6 +9,7 @@ import reviewsSlider from "./modules/reviewsSlider";
 import accordeon from "./modules/accordeon";
 import modalConsult from "./modules/modalConsult";
 import hint from "./modules/hint";
+import transparency from "./modules/transparency";
 
 tel();
 toggleMenu();
@@ -20,3 +21,4 @@ reviewsSlider();
 accordeon();
 modalConsult();
 hint();
+transparency();

@@ -27,10 +27,10 @@ const hint = () => {
       } else if (target.matches("#formula-arrow_right")) {
         currentSlide++;
       }
-
+      // ПРОВЕРИТЬ УСЛОВИЕ С ДЛИНОЙ ПОСЛЕДНЕГО СЛАЙДА
       if (currentSlide > sliders.length) {
         arrowNext.style.display = "none";
-        currentSlide = sliders.length;
+        currentSlide = sliders.length - 1;
       } else if (currentSlide < 0) {
         arrowPrev.style.display = "none";
         currentSlide = 0;
