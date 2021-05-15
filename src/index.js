@@ -11,6 +11,7 @@ import modalConsult from "./modules/modalConsult";
 import hint from "./modules/hint";
 import transparency from "./modules/transparency";
 import repairSlider from "./modules/repairSlider";
+import sendForms from "./modules/sendForms";
 
 tel();
 toggleMenu();
@@ -24,3 +25,4 @@ modalConsult();
 hint();
 transparency();
 repairSlider();
+sendForms();

@@ -77,7 +77,6 @@ const toggleRepairTypes = () => {
       .catch((error) => console.error(error));
     const initListener = () => {
       document.addEventListener("click", (event) => {
-        event.preventDefault();
         const target = event.target;
         if (target.closest(".link-list")) {
           openRepairTypes();

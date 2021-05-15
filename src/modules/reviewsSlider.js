@@ -42,7 +42,6 @@ const reviewsSlider = () => {
   };
   const dot = document.querySelectorAll(".dot-reviews");
   blockReviews.addEventListener("click", (event) => {
-    event.preventDefault();
     const target = event.target;
 
     if (
