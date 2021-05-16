@@ -75,6 +75,7 @@ const toggleRepairTypes = () => {
         createList(response);
       })
       .catch((error) => console.error(error));
+
     const initListener = () => {
       document.addEventListener("click", (event) => {
         const target = event.target;
