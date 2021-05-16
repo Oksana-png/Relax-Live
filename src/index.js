@@ -12,6 +12,7 @@ import hint from "./modules/hint";
 import transparency from "./modules/transparency";
 import repairSlider from "./modules/repairSlider";
 import sendForms from "./modules/sendForms";
+import portfolio from "./modules/portfolio";
 
 tel();
 toggleMenu();
@@ -26,3 +27,6 @@ hint();
 transparency();
 repairSlider();
 sendForms();
+portfolio();
+
+// window.location.href = "http://localhost:3000/url/admin.html";

@@ -1,7 +1,7 @@
 const toggleMenu = () => {
   const menu = document.querySelector(".popup-menu");
   const dialogMenu = document.querySelector(".popup-dialog-menu");
-  const buttonOpen = document.querySelector(".menu__icon");
+  const buttonOpen = document.querySelectorAll(".menu__icon");
   const openMenu = () => {
     menu.style.visibility = "visible";
     dialogMenu.style.transform = "translate3d(0, 0, 0)";
@@ -29,7 +29,9 @@ const toggleMenu = () => {
         closeMenuMobile();
       }
     });
-    buttonOpen.addEventListener("click", openMenuMobile);
+    buttonOpen.forEach((item) => {
+      item.addEventListener("click", openMenuMobile);
+    });
   } else {
     document.addEventListener("click", (e) => {
       const target = e.target;
