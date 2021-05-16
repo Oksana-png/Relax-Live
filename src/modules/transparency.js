@@ -109,5 +109,10 @@ const transparency = () => {
   if (window.innerWidth <= 1091) {
     mobileSlider();
   }
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 1091) {
+      mobileSlider();
+    }
+  });
 };
 export default transparency;

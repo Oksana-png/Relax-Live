@@ -6970,6 +6970,10 @@ div.wave-block:nth-child(17):after {
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1.865 8.813a5 5 0 1 1 2.39 1.875' stroke='%23DCD1CD' stroke-opacity='.8' stroke-width='1.5' stroke-linecap='round' /%3e%3c/svg%3e");
     }
 }
+.active {
+    stroke: #F48922;
+    border-color: #F48922 !important;
+}
 
 .dot_active {
     width: 20px;
