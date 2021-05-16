@@ -45,7 +45,9 @@ const toggleMenu = () => {
         closeMenu();
       }
     });
-    buttonOpen.addEventListener("click", openMenu);
+    buttonOpen.forEach((item) => {
+      item.addEventListener("click", openMenu);
+    });
   }
 };
 

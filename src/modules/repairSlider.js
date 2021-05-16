@@ -124,8 +124,6 @@ const repairSlider = () => {
         prevSlide(tab, currentTab);
         currentTab--;
         runSliderTab();
-
-        console.log(currentTab);
       } else if (target.closest("#nav-arrow-repair-right_base")) {
         prevSlide(tab, currentTab);
         currentTab++;
@@ -133,7 +131,6 @@ const repairSlider = () => {
         if (currentTab === 3) {
           nextArrow.style.display = "none";
         }
-        console.log(currentTab);
       }
     });
   };

@@ -52,7 +52,6 @@ const sendForms = () => {
       const phone = item.querySelector(`input[name="phone"]`),
         inputRequar = item.querySelector(`input[type="checkbox"]`),
         name = item.querySelector(`input[name="name"]`);
-      console.log(phone);
       const postData = (body) =>
         fetch("server.php", {
           method: "POST",
@@ -78,7 +77,6 @@ const sendForms = () => {
             console.error(error);
           });
       };
-      console.log(item);
       if (
         inputRequar.checked &&
         phone.value.trim() !== "" &&
