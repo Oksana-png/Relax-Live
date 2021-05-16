@@ -46,12 +46,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = e.target;
     if (target.closest(".btn-addItem")) {
       addItem();
+    } else if (
+      target.closest(".cancel-button") ||
+      target.closest(".button__close")
+    ) {
+      closeModal();
     }
   });
 });
+const closeModal = () => {
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+  modal.querySelectorAll("input").forEach((item) => (item.value = ""));
+};
 const addItem = () => {
   const modal = document.getElementById("modal");
+  const form = modal.querySelector("form");
+  const inputType = form.querySelector(".input__type"),
+    inputName = form.querySelector(".input__name"),
+    inputUnits = form.querySelector(".input__units"),
+    inputCost = form.querySelector(".input__cost");
   modal.style.display = "flex";
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const target = e.target;
+    if (
+      inputType.value.trim() !== "" &&
+      inputName.value.trim() !== "" &&
+      inputUnits.value.trim() !== "" &&
+      inputCost.value.trim() !== "" &&
+      target.closest(".button-ui_firm")
+    ) {
+      // отправка на сервер данных
+    }
+  });
 };
 const sortingData = (key, data) => {
   if (!data) {
