@@ -105,6 +105,14 @@ const toggleRepairTypes = () => {
     initListener();
   };
   renderData();
+
+  const mobileTypes = () => {};
+  window.addEventListener("resize", () => {
+    if (document.documentElement.offsetWidth < 1025) {
+      mobileTypes();
+    }
+  });
 };
 
+// toggleRepairTypes();
 export default toggleRepairTypes;
