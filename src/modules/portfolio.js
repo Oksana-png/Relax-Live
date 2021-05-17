@@ -96,7 +96,6 @@ const portfolio = () => {
           const target = e.target;
 
           if (target.closest(".slider-arrow_left-portfolio")) {
-            console.log(countTransform);
             countTransform += 200;
 
             allSlide.forEach((item) => {
@@ -221,11 +220,12 @@ const portfolio = () => {
     });
     const prevSlide = (elem, index) => {
       elem.forEach((item) => (item.style.display = "none"));
-
+      slidersText.forEach((item) => (item.style.display = "none"));
       nowCount.textContent = index + 1;
     };
     const nextSlide = (elem, index) => {
       elem[index].style.display = "block";
+      slidersText[index].style.display = "block";
       nowCount.textContent = index + 1;
     };
     const toggleSlide = () => {
@@ -239,5 +239,4 @@ const portfolio = () => {
   };
 };
 
-portfolio();
-// export default portfolio;
+export default portfolio;
