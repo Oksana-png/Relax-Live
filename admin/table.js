@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((response) => {
       val = response;
       renderList(response);
-      console.log(response);
       return val;
     })
     .catch((error) => console.error(error));
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   document.addEventListener("click", (e) => {
-    const target = e.target;
+    let target = e.target;
     if (target.closest(".btn-addItem")) {
       addItem();
     } else if (
@@ -51,22 +50,120 @@ document.addEventListener("DOMContentLoaded", () => {
       target.closest(".button__close")
     ) {
       closeModal();
+    } else if (target.closest(".action-change")) {
+      if (!target.classList.contains("action-change")) {
+        if (!target.parentNode.classList.contains("action-change")) {
+          if (
+            !target.parentNode.parentNode.classList.contains("action-change")
+          ) {
+          } else {
+            target = target.parentNode.parentNode;
+          }
+        } else {
+          target = target.parentNode;
+        }
+      }
+      const elem = target.parentElement.parentElement.parentElement;
+      editElem(elem);
     }
   });
+  document.querySelector(".input__cost").addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/gi, "");
+  });
 });
+const editElem = (elem) => {
+  const form = document.querySelector("form");
+  const id = elem.querySelector(".table__id");
+  let data;
+  fetch(`http://localhost:3000/api/items/${id.textContent}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("not 200 status");
+      }
+      return response.json();
+    })
+    .then((response) => {
+      data = response;
+      render();
+      return data;
+    })
+    .catch((error) => console.error(error));
+  const render = () => {
+    const inputType = form.querySelector(".input__type"),
+      inputName = form.querySelector(".input__name"),
+      inputUnits = form.querySelector(".input__units"),
+      inputCost = form.querySelector(".input__cost"),
+      modal = document.getElementById("modal"),
+      header = modal.querySelector(".modal__header");
+    header.textContent = "Редактировать услугу";
+    modal.style.display = "flex";
+
+    const { type, name, units, cost } = data;
+    inputType.value = type;
+    inputName.value = name;
+    inputUnits.value = units;
+    inputCost.value = cost;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const target = e.target;
+      if (
+        inputType.value.trim() === "" ||
+        inputName.value.trim() === "" ||
+        inputUnits.value.trim() === "" ||
+        inputCost.value.trim() === ""
+      ) {
+        return;
+      }
+      const body = {
+        type: inputType.value,
+        name: inputName.value,
+        units: inputUnits.value,
+        cost: inputCost.value,
+      };
+      console.log(body);
+      fetch(`http://localhost:3000/api/items/${id.textContent}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error("not 200 status");
+          }
+        })
+        .catch((error) => console.error(error));
+    });
+  };
+};
+const deleteElem = () => {
+  const form = document.querySelector("form");
+  const id = elem.querySelector(".table__id");
+  const inputType = form.querySelector(".input__type"),
+    inputName = form.querySelector(".input__name"),
+    inputUnits = form.querySelector(".input__units"),
+    inputCost = form.querySelector(".input__cost");
+};
 const closeModal = () => {
   const modal = document.getElementById("modal");
   modal.style.display = "none";
   modal.querySelectorAll("input").forEach((item) => (item.value = ""));
 };
-const addItem = () => {
+const openModal = () => {
   const modal = document.getElementById("modal");
+  modal.style.display = "flex";
+};
+const addItem = () => {
+  openModal();
   const form = modal.querySelector("form");
   const inputType = form.querySelector(".input__type"),
     inputName = form.querySelector(".input__name"),
     inputUnits = form.querySelector(".input__units"),
     inputCost = form.querySelector(".input__cost");
-  modal.style.display = "flex";
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -75,9 +172,14 @@ const addItem = () => {
       inputType.value.trim() !== "" &&
       inputName.value.trim() !== "" &&
       inputUnits.value.trim() !== "" &&
-      inputCost.value.trim() !== "" &&
-      target.closest(".button-ui_firm")
+      inputCost.value.trim() !== ""
     ) {
+      addService(
+        inputType.value,
+        inputName.value,
+        inputUnits.value,
+        inputCost.value
+      );
       // отправка на сервер данных
     }
   });
@@ -181,4 +283,27 @@ const renderList = (data) => {
     });
   };
   renderSelect();
+};
+
+const addService = (type, name, units, cost) => {
+  const body = {
+    type: type,
+    name: name,
+    units: units,
+    cost: cost,
+  };
+  console.log(body);
+  fetch("http://localhost:3000/api/items", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("not status 200");
+      }
+    })
+    .catch((error) => console.error(error));
 };
