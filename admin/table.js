@@ -65,6 +65,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const elem = target.parentElement.parentElement.parentElement;
       editElem(elem);
+    } else if (target.closest(".action-remove")) {
+      if (!target.classList.contains("action-remove")) {
+        if (!target.parentNode.classList.contains("action-remove")) {
+          if (
+            !target.parentNode.parentNode.classList.contains("action-remove")
+          ) {
+            if (
+              !target.parentNode.parentNode.parentNode.classList.contains(
+                "action-remove"
+              )
+            ) {
+            } else {
+              target = target.parentNode.parentNode.parentNode;
+            }
+          } else {
+            target = target.parentNode.parentNode;
+          }
+        } else {
+          target = target.parentNode;
+        }
+      }
+      const elem = target.parentElement.parentElement.parentElement;
+      deleteElem(elem);
     }
   });
   document.querySelector(".input__cost").addEventListener("input", (e) => {
@@ -140,13 +163,18 @@ const editElem = (elem) => {
     });
   };
 };
-const deleteElem = () => {
+const deleteElem = (elem) => {
   const form = document.querySelector("form");
   const id = elem.querySelector(".table__id");
-  const inputType = form.querySelector(".input__type"),
-    inputName = form.querySelector(".input__name"),
-    inputUnits = form.querySelector(".input__units"),
-    inputCost = form.querySelector(".input__cost");
+  fetch(`http://localhost:3000/api/items/${id.textContent}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("not 200 status");
+      }
+    })
+    .catch((error) => console.error(error));
 };
 const closeModal = () => {
   const modal = document.getElementById("modal");
