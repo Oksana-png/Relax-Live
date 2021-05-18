@@ -146,7 +146,6 @@ const editElem = (elem) => {
         units: inputUnits.value,
         cost: inputCost.value,
       };
-      console.log(body);
       fetch(`http://localhost:3000/api/items/${id.textContent}`, {
         method: "PATCH",
         headers: {
@@ -320,7 +319,6 @@ const addService = (type, name, units, cost) => {
     units: units,
     cost: cost,
   };
-  console.log(body);
   fetch("http://localhost:3000/api/items", {
     method: "POST",
     headers: {
