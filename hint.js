@@ -36,16 +36,20 @@ const hint = () => {
   const mobileHint = () => {
     const arrowPrev = document.querySelector(".slider-arrow_left-formula"),
       arrowNext = document.querySelector(".slider-arrow_right-formula"),
-      wrapperSliders = document.querySelector(".formula-slider"),
       sliders = document.querySelectorAll(".formula-slider__slide"),
-      wrap = document.querySelector(".formula-slider-wrap");
-    let currentSlide = 0;
-    wrapperSliders.style.display = "flex";
+      wrap = document.querySelector(".formula-slider-wrap"),
+      trans = document.querySelector(".formula-slider");
+    let currentSlide = 2;
+    wrap.style.margin = "0 auto";
+    sliders.forEach((item) => (item.style.display = "none"));
+
     const nextSlideAdd = (elem, index, strClass) => {
       elem[index].classList.add(strClass);
+      elem[index].style.display = "flex";
     };
     const prevSlideAdd = (elem, index, strClass) => {
       elem[index].classList.remove(strClass);
+      elem[index].style.display = "none";
     };
     nextSlideAdd(sliders, currentSlide, "active-item");
     document.addEventListener("click", (e) => {
@@ -59,6 +63,7 @@ const hint = () => {
       } else if (target.closest("#formula-arrow_right")) {
         prevSlideAdd(sliders, currentSlide, "active-item"); // сами слайды
         currentSlide++;
+
         checkBtn();
         nextSlideAdd(sliders, currentSlide, "active-item");
       }
@@ -86,6 +91,5 @@ const hint = () => {
     });
   }
 };
-//hint();
 
 export default hint;
