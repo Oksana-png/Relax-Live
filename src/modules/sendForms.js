@@ -34,6 +34,9 @@ const sendForms = () => {
             }
             //сообщение об усп. отправке
             successMsg.style.visibility = "visible";
+            setTimeout(() => {
+              successMsg.style.visibility = "hidden";
+            }, 5000);
           })
           .catch((error) => {
             console.error(error);
@@ -52,6 +55,9 @@ const sendForms = () => {
           const del = document.querySelector(".popup-consultation");
           del.style.visibility = "hidden";
         }
+      } else {
+        phone.value = "";
+        alert("Введите правильные данные!");
       }
     });
   });
@@ -81,6 +87,9 @@ const sendForms = () => {
             }
             //сообщение об усп. отправке
             successMsg.style.visibility = "visible";
+            setTimeout(() => {
+              successMsg.style.visibility = "hidden";
+            }, 5000);
           })
           .catch((error) => {
             console.error(error);
@@ -98,6 +107,10 @@ const sendForms = () => {
         phone.value = "";
         name.value = "";
         inputRequar.checked = false;
+      } else {
+        phone.value = "";
+        name.value = "";
+        alert("Введите правильные данные!");
       }
     });
   });
@@ -105,6 +118,7 @@ const sendForms = () => {
   btnCloseSuccess.addEventListener("click", () => {
     successMsg.style.visibility = "hidden";
   });
+
   var keyCode;
   function mask(event) {
     event.keyCode && (keyCode = event.keyCode);

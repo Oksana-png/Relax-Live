@@ -212,6 +212,13 @@ const portfolio = () => {
         prevSlide(slidersImg, currentSlide);
         currentSlide--;
         toggleSlide();
+      } else if (
+        target.closest(".popup-portfolio") &&
+        !target.closest(".popup-dialog-portfolio")
+      ) {
+        popupPortfolio.style.visibility = "hidden";
+        slidersImg[currentSlide].style.display = "none";
+        slidersText[currentSlide].style.display = "none";
       }
       if (currentSlide === 0) {
         arrowLeft.style.display = "none";

@@ -16,6 +16,11 @@ const privacyLink = () => {
     const target = e.target;
     if (target.closest(".popup-privacy") && target.closest(".close")) {
       closePrivacy();
+    } else if (
+      target.closest(".popup-privacy") &&
+      !target.closest(".popup-dialog-privacy")
+    ) {
+      closePrivacy();
     }
   });
 };

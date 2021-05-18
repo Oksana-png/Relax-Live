@@ -10,8 +10,8 @@ const toggleMenu = () => {
   };
   const closeMenu = () => {
     menu.style.visibility = "hidden";
-    menu.style.opacity = 0;
     dialogMenu.style.transform = "translate3d(645px, 0, 0)";
+    menu.style.opacity = 0;
   };
   const openMenuMobile = () => {
     menu.style.visibility = "visible";
@@ -51,6 +51,12 @@ const toggleMenu = () => {
           closeMenu();
         }
         if (target.closest(".popup-menu") && target.closest(".link-list")) {
+          closeMenu();
+        }
+        if (
+          !target.closest(".popup-dialog-menu") &&
+          target.closest(".popup-menu")
+        ) {
           closeMenu();
         }
       });

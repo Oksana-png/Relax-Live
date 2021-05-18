@@ -22,6 +22,12 @@ const modalConsult = () => {
     if (target.closest(".close-consultation")) {
       modalClose();
     }
+    if (
+      target.closest(".popup-consultation") &&
+      !target.closest(".feedback-wrap")
+    ) {
+      modalClose();
+    }
   });
 };
 

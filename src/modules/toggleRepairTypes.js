@@ -85,6 +85,8 @@ const toggleRepairTypes = () => {
           mobileTypes();
         }
       });
+      const successMsg = document.querySelector(".popup-thank");
+
       document.addEventListener("click", (event) => {
         const target = event.target;
         if (target.closest(".link-list")) {
@@ -92,9 +94,21 @@ const toggleRepairTypes = () => {
           if (document.documentElement.offsetWidth < 1025) {
             mobileTypes();
           }
-        }
-        if (target.closest(".popup-repair-types") && target.closest(".close")) {
+        } else if (
+          target.closest(".popup-repair-types") &&
+          target.closest(".close")
+        ) {
           popupRepairTypes.style.visibility = "hidden";
+        } else if (
+          target.closest(".popup-repair-types") &&
+          !target.closest(".popup-dialog-repair-types")
+        ) {
+          popupRepairTypes.style.visibility = "hidden";
+        } else if (
+          target.closest(".popup-thank") &&
+          !target.closest(".popup-thank-bg")
+        ) {
+          successMsg.style.visibility = "hidden";
         }
         // ДАННЫЕ
         const filterButton = document.querySelectorAll(

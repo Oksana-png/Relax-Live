@@ -28,8 +28,12 @@ const transparency = () => {
     const target = e.target;
     if (target.closest(".transparency-item__img")) {
       openModal(target);
-    }
-    if (target.closest(".popup-transparency .close")) {
+    } else if (target.closest(".popup-transparency .close")) {
+      modalTransparency.style.visibility = "hidden";
+    } else if (
+      target.closest(".popup-transparency") &&
+      !target.closest(".popup-dialog-transparency")
+    ) {
       modalTransparency.style.visibility = "hidden";
     }
   });

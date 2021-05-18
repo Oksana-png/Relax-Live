@@ -4,7 +4,7 @@ const hint = () => {
 
   const desctorHint = (e) => {
     const target = e.target;
-
+    console.log(target);
     formulaItemCurcule.forEach((item, i) => {
       if (target === item) {
         textHint[i].style.visibility = "visible";
