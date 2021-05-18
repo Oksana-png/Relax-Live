@@ -30,10 +30,25 @@ const sendForms = () => {
         postData(body)
           .then((responce) => {
             if (responce.status !== 200 || responce.status === 405) {
-              alert("К сожалению, произошла ошибка, повторите снова");
+              successMsg.querySelector(
+                ".popup-thank__title"
+              ).innerHTML = `Извините!<br>Произошла ошибка`;
+              successMsg.querySelector(
+                ".popup-thank__descr"
+              ).textContent = `Попробуйте снова. При возникновении неполадок свяжитесь с нами`;
+              successMsg.style.visibility = "visible";
+              setTimeout(() => {
+                successMsg.style.visibility = "hidden";
+              }, 5000);
               throw new Error("status network not 200");
             }
             //сообщение об усп. отправке
+            successMsg.querySelector(
+              ".popup-thank__title"
+            ).innerHTML = `Спасибо<br>за обращение!`;
+            successMsg.querySelector(
+              ".popup-thank__descr"
+            ).textContent = `Ожидайте звонка нашего специалиста. Будем рады помогать Вам!`;
             successMsg.style.visibility = "visible";
             setTimeout(() => {
               successMsg.style.visibility = "hidden";
@@ -84,10 +99,25 @@ const sendForms = () => {
         postData(body)
           .then((responce) => {
             if (responce.status !== 200) {
-              alert("К сожалению, произошла ошибка, повторите снова");
+              successMsg.querySelector(
+                ".popup-thank__title"
+              ).innerHTML = `Извините!<br>Произошла ошибка`;
+              successMsg.querySelector(
+                ".popup-thank__descr"
+              ).textContent = `Попробуйте снова. При возникновении неполадок свяжитесь с нами`;
+              successMsg.style.visibility = "visible";
+              setTimeout(() => {
+                successMsg.style.visibility = "hidden";
+              }, 5000);
               throw new Error("status network not 200");
             }
             //сообщение об усп. отправке
+            successMsg.querySelector(
+              ".popup-thank__title"
+            ).innerHTML = `Спасибо<br>за обращение!`;
+            successMsg.querySelector(
+              ".popup-thank__descr"
+            ).textContent = `Ожидайте звонка нашего специалиста. Будем рады помогать Вам!`;
             successMsg.style.visibility = "visible";
             setTimeout(() => {
               successMsg.style.visibility = "hidden";
