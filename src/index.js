@@ -28,5 +28,3 @@ transparency();
 repairSlider();
 sendForms();
 portfolio();
-
-// window.location.href = "http://localhost:3000/url/admin.html";

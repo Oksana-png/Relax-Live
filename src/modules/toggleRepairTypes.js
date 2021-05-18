@@ -19,8 +19,8 @@ const toggleRepairTypes = () => {
       // const elemNav = document.querySelectorAll(".popup-repair-types-nav__item");
       // elemNav.forEach(item => item.style.display = 'block');
       const listRepair = document.querySelector(".nav-list-popup-repair");
+      listRepair.textContent = "";
       const listDataRepair = new Set();
-
       for (let item of data) {
         listDataRepair.add(item.type, 0);
       }
@@ -80,16 +80,18 @@ const toggleRepairTypes = () => {
       .catch((error) => console.error(error));
 
     const initListener = () => {
+      window.addEventListener("resize", () => {
+        if (document.documentElement.offsetWidth < 1025) {
+          mobileTypes();
+        }
+      });
       document.addEventListener("click", (event) => {
         const target = event.target;
         if (target.closest(".link-list")) {
           openRepairTypes();
-          window.addEventListener("resize", () => {
-            if (document.documentElement.offsetWidth < 1045) {
-              mobileTypes();
-            }
-          });
-          mobileTypes();
+          if (document.documentElement.offsetWidth < 1025) {
+            mobileTypes();
+          }
         }
         if (target.closest(".popup-repair-types") && target.closest(".close")) {
           popupRepairTypes.style.visibility = "hidden";

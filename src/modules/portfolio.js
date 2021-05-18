@@ -34,7 +34,7 @@ const portfolio = () => {
         let currentSlide = 0;
 
         const prevSlide = (elem, index) => {
-          elem[index].style.display = "none";
+          elem.forEach((item) => (item.style.display = "none"));
           nowCount.textContent = index + 1;
         };
         const nextSlide = (elem, index) => {
@@ -51,10 +51,10 @@ const portfolio = () => {
         };
 
         const init = () => {
-          const hover = document.querySelector(
+          const hover = document.querySelectorAll(
             ".portfolio-slider-mobile .item-hover"
           );
-          hover.style.visibility = "hidden";
+          hover.forEach((item) => (item.style.visibility = "hidden"));
           createCount();
           sliders.forEach((item, i) => {
             if (i === 0) {
@@ -176,8 +176,10 @@ const portfolio = () => {
     let currentSlide = index;
     if (currentSlide === 0) {
       arrowLeft.style.display = "none";
+      arrowRigth.style.display = "block";
     } else if (currentSlide === slidersImg.length - 1) {
       arrowRigth.style.display = "none";
+      arrowLeft.style.display = "block";
     } else {
       arrowLeft.style.display = "block";
       arrowRigth.style.display = "block";
