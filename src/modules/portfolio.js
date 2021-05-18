@@ -51,6 +51,10 @@ const portfolio = () => {
         };
 
         const init = () => {
+          const hover = document.querySelector(
+            ".portfolio-slider-mobile .item-hover"
+          );
+          hover.style.visibility = "hidden";
           createCount();
           sliders.forEach((item, i) => {
             if (i === 0) {

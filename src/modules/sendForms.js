@@ -2,8 +2,13 @@ const sendForms = () => {
   const forms = document.querySelectorAll(".feedback__form"),
     blockFull = document.querySelectorAll(".feedback-block__form"),
     successMsg = document.querySelector(".popup-thank"),
-    btnCloseSuccess = successMsg.querySelector(".close-thank");
-
+    btnCloseSuccess = successMsg.querySelector(".close-thank"),
+    nameInput = document.querySelectorAll('input[name="name"]');
+  nameInput.forEach((item) => {
+    item.addEventListener("input", () => {
+      item.value = item.value.replace(/[^а-я -]/gi, "");
+    });
+  });
   forms.forEach((form) => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -34,7 +39,11 @@ const sendForms = () => {
             console.error(error);
           });
       };
-      if (inputRequar.checked && phone.value.trim() !== "") {
+      if (
+        inputRequar.checked &&
+        phone.value.trim() !== "" &&
+        phone.value.trim().length === 18
+      ) {
         const formData = new FormData(form);
         getForm(formData, form);
         phone.value = "";
@@ -80,7 +89,9 @@ const sendForms = () => {
       if (
         inputRequar.checked &&
         phone.value.trim() !== "" &&
-        name.value.trim() !== ""
+        name.value.trim() !== "" &&
+        phone.value.trim().length === 18 &&
+        name.value.trim().length >= 2
       ) {
         const formData = new FormData(item);
         getForm(formData, item);
