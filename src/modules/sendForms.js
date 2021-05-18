@@ -30,6 +30,7 @@ const sendForms = () => {
         postData(body)
           .then((responce) => {
             if (responce.status !== 200 || responce.status === 405) {
+              alert("К сожалению, произошла ошибка, повторите снова");
               throw new Error("status network not 200");
             }
             //сообщение об усп. отправке
@@ -83,6 +84,7 @@ const sendForms = () => {
         postData(body)
           .then((responce) => {
             if (responce.status !== 200) {
+              alert("К сожалению, произошла ошибка, повторите снова");
               throw new Error("status network not 200");
             }
             //сообщение об усп. отправке
