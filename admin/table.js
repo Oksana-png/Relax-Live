@@ -97,6 +97,30 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".input__cost").addEventListener("input", (e) => {
     e.target.value = e.target.value.replace(/[^0-9]/gi, "");
   });
+  const modal = document.getElementById("modal"),
+    form = modal.querySelector("form"),
+    inputType = form.querySelector(".input__type"),
+    inputName = form.querySelector(".input__name"),
+    inputUnits = form.querySelector(".input__units"),
+    inputCost = form.querySelector(".input__cost");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const target = e.target;
+    if (
+      inputType.value.trim() !== "" &&
+      inputName.value.trim() !== "" &&
+      inputUnits.value.trim() !== "" &&
+      inputCost.value.trim() !== ""
+    ) {
+      addService(
+        inputType.value,
+        inputName.value,
+        inputUnits.value,
+        inputCost.value
+      );
+      // отправка на сервер данных
+    }
+  });
 });
 const editElem = (elem) => {
   const form = document.querySelector("form");
@@ -191,33 +215,10 @@ const closeModal = () => {
 };
 const addItem = () => {
   const modal = document.getElementById("modal");
-  const form = modal.querySelector("form");
-  const inputType = form.querySelector(".input__type"),
-    inputName = form.querySelector(".input__name"),
-    inputUnits = form.querySelector(".input__units"),
-    inputCost = form.querySelector(".input__cost"),
+  const form = modal.querySelector("form"),
     header = modal.querySelector(".modal__header");
   header.textContent = "Добавить услугу";
   modal.style.display = "flex";
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const target = e.target;
-    if (
-      inputType.value.trim() !== "" &&
-      inputName.value.trim() !== "" &&
-      inputUnits.value.trim() !== "" &&
-      inputCost.value.trim() !== ""
-    ) {
-      addService(
-        inputType.value,
-        inputName.value,
-        inputUnits.value,
-        inputCost.value
-      );
-      // отправка на сервер данных
-    }
-  });
 };
 const sortingData = (key, data) => {
   if (!data) {
