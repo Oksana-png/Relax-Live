@@ -51,10 +51,6 @@ const portfolio = () => {
         };
 
         const init = () => {
-          const hover = document.querySelectorAll(
-            ".portfolio-slider-mobile .item-hover"
-          );
-          hover.forEach((item) => (item.style.visibility = "hidden"));
           createCount();
           sliders.forEach((item, i) => {
             if (i === 0) {
@@ -74,6 +70,13 @@ const portfolio = () => {
               prevSlide(sliders, currentSlide);
               currentSlide++;
               toggleSlide();
+            } else if (target.closest(".portfolio-slider-mobile")) {
+              console.log(target);
+              sliders.forEach((item, i) => {
+                if (item === e.target) {
+                  openModalPortfolio(i);
+                }
+              });
             }
           });
         };

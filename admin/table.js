@@ -11,11 +11,12 @@ function getCookie(name) {
 const dataUser = JSON.parse(getCookie("authorization"));
 
 if (!dataUser.authorized) {
-  document.location.href = "http://127.0.0.1:5500/admin/index.html";
+  const adres = location.origin;
+  document.location.href = `${adres}/admin/index.html`;
 }
 // КОГДА ПРОВЕРА ПРОЙДЕНА
 let val;
-document.addEventListener("DOMContentLoaded", () => {
+const getDataServer = () => {
   fetch("http://localhost:3000/api/items")
     .then((response) => {
       if (response.status !== 200) {
@@ -29,6 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return val;
     })
     .catch((error) => console.error(error));
+};
+document.addEventListener("DOMContentLoaded", () => {
+  getDataServer();
 
   document.addEventListener("change", (e) => {
     e.preventDefault();
@@ -157,6 +161,10 @@ const editElem = (elem) => {
           if (response.status !== 200) {
             throw new Error("not 200 status");
           }
+          getDataServer();
+          setTimeout(() => {
+            closeModal();
+          }, 3000);
         })
         .catch((error) => console.error(error));
     });
@@ -172,6 +180,7 @@ const deleteElem = (elem) => {
       if (response.status !== 200) {
         throw new Error("not 200 status");
       }
+      getDataServer();
     })
     .catch((error) => console.error(error));
 };
@@ -180,17 +189,16 @@ const closeModal = () => {
   modal.style.display = "none";
   modal.querySelectorAll("input").forEach((item) => (item.value = ""));
 };
-const openModal = () => {
-  const modal = document.getElementById("modal");
-  modal.style.display = "flex";
-};
 const addItem = () => {
-  openModal();
+  const modal = document.getElementById("modal");
   const form = modal.querySelector("form");
   const inputType = form.querySelector(".input__type"),
     inputName = form.querySelector(".input__name"),
     inputUnits = form.querySelector(".input__units"),
-    inputCost = form.querySelector(".input__cost");
+    inputCost = form.querySelector(".input__cost"),
+    header = modal.querySelector(".modal__header");
+  header.textContent = "Добавить услугу";
+  modal.style.display = "flex";
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -330,6 +338,10 @@ const addService = (type, name, units, cost) => {
       if (response.status !== 200) {
         throw new Error("not status 200");
       }
+      getDataServer();
+      setTimeout(() => {
+        closeModal();
+      }, 3000);
     })
     .catch((error) => console.error(error));
 };

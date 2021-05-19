@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     inputs.forEach((item) => (item.value = ""));
     authorized.authorized = true;
     document.cookie = `authorization=${JSON.stringify(authorized)}`;
-    window.location = "http://127.0.0.1:5500/admin/table.html";
+    const adres = location.origin;
+    window.location = `${adres}/admin/table.html`;
   };
 
   function getCookie(name) {
@@ -36,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (dataUser.authorized) {
     entryAccount();
   }
-  
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
