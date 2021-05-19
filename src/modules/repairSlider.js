@@ -79,14 +79,17 @@ const repairSlider = () => {
     }
   });
   const tabsSliderMobile = () => {
-    const wrapOverfHid = wrapRepair.querySelector(".repair-types-nav__item");
+    const wrapOverfHid = wrapRepair.querySelectorAll(".repair-types-nav__item");
     const nextArrow = document.querySelector("#nav-arrow-repair-right_base");
     const prevArrow = document.querySelector("#nav-arrow-repair-left_base");
     const list = document.querySelector(".nav-list-repair");
     list.style.minWidth = "inherit";
     let currentTab = 1;
-    tab.forEach((item) => (item.style.display = "none"));
-
+    tab.forEach((item) => {
+      item.style.display = "none";
+      item.style.marginLeft = "auto";
+      item.style.marginRight = "auto";
+    });
     const nextSlide = (elem, index) => {
       elem[index + 1].style.display = "block";
       elem[index].style.display = "block";

@@ -19,7 +19,7 @@ let val;
 const getDataServer = () => {
   fetch("http://localhost:3000/api/items")
     .then((response) => {
-      if (response.status !== 200) {
+      if (response.status < 299) {
         throw new Error("not status 200");
       }
       return response.json();
@@ -106,7 +106,7 @@ const editElem = (elem) => {
     method: "GET",
   })
     .then((response) => {
-      if (response.status !== 200) {
+      if (response.status < 299) {
         throw new Error("not 200 status");
       }
       return response.json();
@@ -158,7 +158,7 @@ const editElem = (elem) => {
         body: JSON.stringify(body),
       })
         .then((response) => {
-          if (response.status !== 200) {
+          if (response.status < 299) {
             throw new Error("not 200 status");
           }
           getDataServer();
@@ -177,7 +177,7 @@ const deleteElem = (elem) => {
     method: "DELETE",
   })
     .then((response) => {
-      if (response.status !== 200) {
+      if (response.status < 299) {
         throw new Error("not 200 status");
       }
       getDataServer();
@@ -335,7 +335,7 @@ const addService = (type, name, units, cost) => {
     body: JSON.stringify(body),
   })
     .then((response) => {
-      if (response.status !== 200) {
+      if (response.status < 299) {
         throw new Error("not status 200");
       }
       getDataServer();
